@@ -1,7 +1,9 @@
 #include <iostream>
 #include <algorithm>
-#include <vector>
 #include <chrono>
+#include <fstream>
+#include <sstream>
+#include <string>
 
 using namespace std;
 using namespace std::chrono;
@@ -149,8 +151,31 @@ void quickSort(int arr[], int low, int high) {
 
 //int argc, char const *argv[]
 
+void lerArquivoParaArray(const string& nomeArquivo, int arr[], unsigned int N) {
+    string caminho = "./files/" + nomeArquivo;  // Caminho com o diretório ./files/
+    ifstream file(caminho);
+    
+    if (!file.is_open()) {
+        cerr << "Erro ao abrir o arquivo: " << caminho << endl;
+        return;
+    }
+
+    string linha;
+    if (getline(file, linha)) {
+        stringstream ss(linha);
+        string valor;
+        unsigned int i = 0;
+
+        while (getline(ss, valor, ',') && i < N) {
+            arr[i] = stoi(valor);
+            i++;
+        }
+    }
+
+    file.close();
+}
+
 int main(){
-    // Teste
     int array[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
     int n = 10;
   	
@@ -162,10 +187,6 @@ int main(){
     auto end = high_resolution_clock::now();
     
     cout << "Valores: " << duration_cast<nanoseconds>(end - start).count() << " nanoseconds" << endl;
-
-    for (auto i : array) {
-        cout << i << " ";
-    }
     
     return 0;
 }
