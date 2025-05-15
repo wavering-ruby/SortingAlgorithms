@@ -1,10 +1,27 @@
 #include <bits/stdc++.h>
+#include <chrono>
 using namespace std;
+using namespace std::chrono;
 
-int partition(vector<int> &vec, int low, int high) {
+void insertionSort(int arr[], int n){
+    for (int i = 1; i < n; ++i) {
+        int key = arr[i];
+        int j = i - 1;
 
+        /* Move elements of arr[0..i-1], that are
+           greater than key, to one position ahead
+           of their current position */
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+int partition(int arr[], int low, int high) {
     // Selecting last element as the pivot
-    int pivot = vec[high];
+    int pivot = arr[high];
 
     // Index of elemment just before the last element
     // It is used for swapping
@@ -14,20 +31,26 @@ int partition(vector<int> &vec, int low, int high) {
 
         // If current element is smaller than or
         // equal to pivot
-        if (vec[j] <= pivot) {
+        if (arr[j] <= pivot) {
             i++;
-            swap(vec[i], vec[j]);
+            // swap(arr[i], arr[j]);
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
     }
 
     // Put pivot to its position
-    swap(vec[i + 1], vec[high]);
+    // swap(arr[i + 1], arr[high]);
+    int temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
 
     // Return the point of partition
     return (i + 1);
 }
 
-void quickSort(vector<int> &vec, int low, int high) {
+void quickSort(int arr[], int low, int high) {
 
     // Base case: This part will be executed till the starting
     // index low is lesser than the ending index high
@@ -35,24 +58,41 @@ void quickSort(vector<int> &vec, int low, int high) {
 
         // pi is Partitioning Index, arr[p] is now at
         // right place
-        int pi = partition(vec, low, high);
+        int pi = partition(arr, low, high);
 
         // Separately sort elements before and after the
         // Partition Index pi
-        quickSort(vec, low, pi - 1);
-        quickSort(vec, pi + 1, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
     }
 }
 
 int main() {
     // Teste
-    //vector<int> vec = {10, 7, 8, 9, 1, 5};
-    //int n = vec.size();
+    int array[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    int n = 10;
+  	
+  	auto start = high_resolution_clock::now();
+  	
+  	// Função do QuickSort
+    quickSort(array, 0, n - 1);
+    
+    auto end = high_resolution_clock::now();
+    
+    cout << duration_cast<nanoseconds>(end - start).count() << " nanoseconds" << endl;
+    
+    int array1[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    
+    start = high_resolution_clock::now();
+  	
+  	// Função do InsertionSort
+    insertionSort(array, n);
+    
+    end = high_resolution_clock::now();
+    
+    cout << duration_cast<nanoseconds>(end - start).count() << " nanoseconds" << endl;
 
-    // Função do QuickSort
-    quickSort(vec, 0, n - 1);
-
-    for (auto i : vec) {
+    for (auto i : array) {
         cout << i << " ";
     }
     
