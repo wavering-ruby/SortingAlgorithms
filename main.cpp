@@ -1,5 +1,3 @@
-// C++ Program to demonstrate how to implement the quick
-// sort algorithm
 #include <bits/stdc++.h>
 using namespace std;
 
