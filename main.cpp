@@ -3,6 +3,23 @@
 using namespace std;
 using namespace std::chrono;
 
+void bubbleSort(int arr[], int n) {
+    bool swapped;
+    for (int i = 0; i < n - 1; i++) {
+        swapped = false;
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+        
+        if (swapped == false)
+            break;
+    }
+}
+
 // A utility function to get maximum
 // value in arr[]
 int getMax(int arr[], int n){ // Radix sort
@@ -136,7 +153,7 @@ int main() {
     
     auto end = high_resolution_clock::now();
     
-    cout << duration_cast<nanoseconds>(end - start).count() << " nanoseconds" << endl;
+    cout << "Quick Sort: " << duration_cast<nanoseconds>(end - start).count() << " nanoseconds" << endl;
     
     int array1[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
     
@@ -147,18 +164,29 @@ int main() {
     
     end = high_resolution_clock::now();
     
-    cout << duration_cast<nanoseconds>(end - start).count() << " nanoseconds" << endl;
+    cout << "Insertion Sort: " << duration_cast<nanoseconds>(end - start).count() << " nanoseconds" << endl;
     
     int array2[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
     
     start = high_resolution_clock::now();
   	
-  	// Função do InsertionSort
+  	// Função do Radix Sort
     radixsort(array2, n);
     
     end = high_resolution_clock::now();
     
-    cout << duration_cast<nanoseconds>(end - start).count() << " nanoseconds" << endl;
+    cout << "Radixsort: " << duration_cast<nanoseconds>(end - start).count() << " nanoseconds" << endl;
+    
+    int array3[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    
+    start = high_resolution_clock::now();
+  	
+  	// Função do Bubble Sort
+    bubbleSort(array3, n);
+    
+    end = high_resolution_clock::now();
+    
+    cout << "Bubble Sort: " << duration_cast<nanoseconds>(end - start).count() << " nanoseconds" << endl;
 
     for (auto i : array) {
         cout << i << " ";
