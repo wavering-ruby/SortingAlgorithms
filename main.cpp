@@ -48,8 +48,8 @@ int main() {
     // Teste
     //vector<int> vec = {10, 7, 8, 9, 1, 5};
     //int n = vec.size();
-	
-  	// Função do QuickSort
+
+    // Função do QuickSort
     quickSort(vec, 0, n - 1);
 
     for (auto i : vec) {
