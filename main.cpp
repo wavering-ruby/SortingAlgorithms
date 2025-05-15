@@ -1,5 +1,8 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <algorithm>
+#include <vector>
 #include <chrono>
+
 using namespace std;
 using namespace std::chrono;
 
@@ -35,7 +38,7 @@ int getMax(int arr[], int n){ // Radix sort
 // represented by exp.
 void countSort(int arr[], int n, int exp){ // Radix sort
     // Output array
-    int output[n];
+    int* output = new int[n]; // aloca dinamicamente
     int i, count[10] = { 0 };
 
     // Store count of occurrences
@@ -60,6 +63,8 @@ void countSort(int arr[], int n, int exp){ // Radix sort
     // numbers according to current digit
     for (i = 0; i < n; i++)
         arr[i] = output[i];
+
+    delete[] output; // libera a memória alocada
 }
 
 // The main function to that sorts arr[]
@@ -141,7 +146,10 @@ void quickSort(int arr[], int low, int high) {
     }
 }
 
-int main() {
+
+//int argc, char const *argv[]
+
+int main(){
     // Teste
     int array[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
     int n = 10;
@@ -153,40 +161,7 @@ int main() {
     
     auto end = high_resolution_clock::now();
     
-    cout << "Quick Sort: " << duration_cast<nanoseconds>(end - start).count() << " nanoseconds" << endl;
-    
-    int array1[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-    
-    start = high_resolution_clock::now();
-  	
-  	// Função do InsertionSort
-    insertionSort(array1, n);
-    
-    end = high_resolution_clock::now();
-    
-    cout << "Insertion Sort: " << duration_cast<nanoseconds>(end - start).count() << " nanoseconds" << endl;
-    
-    int array2[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-    
-    start = high_resolution_clock::now();
-  	
-  	// Função do Radix Sort
-    radixsort(array2, n);
-    
-    end = high_resolution_clock::now();
-    
-    cout << "Radixsort: " << duration_cast<nanoseconds>(end - start).count() << " nanoseconds" << endl;
-    
-    int array3[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-    
-    start = high_resolution_clock::now();
-  	
-  	// Função do Bubble Sort
-    bubbleSort(array3, n);
-    
-    end = high_resolution_clock::now();
-    
-    cout << "Bubble Sort: " << duration_cast<nanoseconds>(end - start).count() << " nanoseconds" << endl;
+    cout << "Valores: " << duration_cast<nanoseconds>(end - start).count() << " nanoseconds" << endl;
 
     for (auto i : array) {
         cout << i << " ";
