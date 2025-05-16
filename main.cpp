@@ -8,6 +8,59 @@
 using namespace std;
 using namespace std::chrono;
 
+void merge(int arr[], int left, int mid, int right) {
+    const int n1 = mid - left + 1;
+    const int n2 = right - mid;
+    // int *L = new int[n1]; // Aloca no heap (memória ilimitada)
+    // int *R = new int[n2]; // Aloca no heap (memória ilimitada)
+    int L[n1], R[n2]; // Aloca no stack (memória limitada)
+
+    for (int i = 0; i < n1; i++)
+        L[i] = arr[left + i];
+    for (int j = 0; j < n2; j++)
+        R[j] = arr[mid + 1 + j];
+
+    int i = 0, j = 0, k = left;
+
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+
+        k++;
+    }
+
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+
+    // delete[] L; // Libera a memória ao final
+    // delete[] R; // Libera a memória ao final
+}
+
+void mergeSort(int arr[], int left, int right) {
+    if (left >= right){
+        return;
+    }
+
+    int mid = left + (right - left) / 2;
+    mergeSort(arr, left, mid);
+    mergeSort(arr, mid + 1, right);
+    merge(arr, left, mid, right);
+}
+
 void bubbleSort(int arr[], int n){
     bool swapped;
     for(int i = 0; i < n - 1; i++) {
@@ -39,7 +92,7 @@ int getMax(int arr[], int n){ // Radix sort
 // A function to do counting sort of arr[]
 // according to the digit
 // represented by exp.
-void countSort(int arr[], int n, int exp){ // Radix sort
+void countSortR(int arr[], int n, int exp){ // Radix sort
     // Output array
     int* output = new int[n]; // aloca dinamicamente
     int i, count[10] = { 0 };
@@ -72,7 +125,7 @@ void countSort(int arr[], int n, int exp){ // Radix sort
 
 // The main function to that sorts arr[]
 // of size n using Radix Sort
-void radixsort(int arr[], int n){ // radixsort
+void radixSort(int arr[], int n){ // radixsort
     // Find the maximum number to
     // know number of digits
     int m = getMax(arr, n);
@@ -81,8 +134,9 @@ void radixsort(int arr[], int n){ // radixsort
     // Note that instead of passing digit
     // number, exp is passed. exp is 10^i
     // where i is current digit number
-    for (int exp = 1; m / exp > 0; exp *= 10)
-        countSort(arr, n, exp);
+    for (int exp = 1; m / exp > 0; exp *= 10){
+        countSortR(arr, n, exp);
+    }
 }
 
 void insertionSort(int arr[], int n){
@@ -174,13 +228,21 @@ int main(){
     const unsigned int N = 100000;
     int *arr = new int[N]; // Aloca no heap (memória ilimitada)
 
-    string fileName = "OrdenedNumbers.txt";
+    string fileName = "RandomNumbers3.txt";
 
     readFile(fileName, arr, N);
 
+    // Algoritmos implementados:
+    /*
+        - Bubble Sort
+        - Insertion Sort
+        - Radin Sort
+        - Quick Sort
+    */
+
     auto start = high_resolution_clock::now();
 
-    bubbleSort(arr, N);
+    mergeSort(arr, 0, N - 1);
 
     auto end = high_resolution_clock::now();
 
