@@ -1,5 +1,4 @@
 #include <iostream>
-#include <algorithm>
 #include <chrono>
 #include <fstream>
 #include <sstream>
@@ -228,6 +227,9 @@ int main(){
     const unsigned int N = 100000;
     int *arr = new int[N]; // Aloca no heap (memória ilimitada)
 
+    //*************************************************
+    //********* Mude aqui o nome do arquivo ***********
+    //*************************************************
     string fileName = "RandomNumbers3.txt";
 
     readFile(fileName, arr, N);
@@ -238,11 +240,16 @@ int main(){
         - Insertion Sort
         - Radin Sort
         - Quick Sort
+        - Merge Sort
     */
 
     auto start = high_resolution_clock::now();
 
-    mergeSort(arr, 0, N - 1);
+    // quickSort(arr, 0, N - 1);
+    // mergeSort(arr, 0, N - 1);
+    // radixSort(arr, N);
+    // insertionSort(arr, N);
+    bubbleSort(arr, N);
 
     auto end = high_resolution_clock::now();
 
