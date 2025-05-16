@@ -8,15 +8,16 @@
 using namespace std;
 using namespace std::chrono;
 
-void bubbleSort(int arr[], int n) {
+void bubbleSort(int arr[], int n){
     bool swapped;
-    for (int i = 0; i < n - 1; i++) {
+    for(int i = 0; i < n - 1; i++) {
         swapped = false;
         for (int j = 0; j < n - i - 1; j++) {
             if (arr[j] > arr[j + 1]) {
                 int temp = arr[j];
                 arr[j] = arr[j + 1];
                 arr[j + 1] = temp;
+                swapped = true;
             }
         }
         
@@ -55,7 +56,7 @@ void countSort(int arr[], int n, int exp){ // Radix sort
         count[i] += count[i - 1];
 
     // Build the output array
-    for (i = n - 1; i >= 0; i--) {
+    for (i = n - 1; i >= 0; i--){
         output[count[(arr[i] / exp) % 10] - 1] = arr[i];
         count[(arr[i] / exp) % 10]--;
     }
@@ -100,7 +101,7 @@ void insertionSort(int arr[], int n){
     }
 }
 
-int partition(int arr[], int low, int high) {
+int partition(int arr[], int low, int high){
     // Selecting last element as the pivot
     int pivot = arr[high];
 
@@ -108,13 +109,11 @@ int partition(int arr[], int low, int high) {
     // It is used for swapping
     int i = (low - 1);
 
-    for (int j = low; j <= high - 1; j++) {
-
+    for (int j = low; j <= high - 1; j++){
         // If current element is smaller than or
         // equal to pivot
         if (arr[j] <= pivot) {
             i++;
-            // swap(arr[i], arr[j]);
             int temp = arr[i];
             arr[i] = arr[j];
             arr[j] = temp;
@@ -122,7 +121,6 @@ int partition(int arr[], int low, int high) {
     }
 
     // Put pivot to its position
-    // swap(arr[i + 1], arr[high]);
     int temp = arr[i + 1];
     arr[i + 1] = arr[high];
     arr[high] = temp;
@@ -131,7 +129,7 @@ int partition(int arr[], int low, int high) {
     return (i + 1);
 }
 
-void quickSort(int arr[], int low, int high) {
+void quickSort(int arr[], int low, int high){
 
     // Base case: This part will be executed till the starting
     // index low is lesser than the ending index high
@@ -140,6 +138,7 @@ void quickSort(int arr[], int low, int high) {
         // pi is Partitioning Index, arr[p] is now at
         // right place
         int pi = partition(arr, low, high);
+        // cout << "PI: " << pi << endl;
 
         // Separately sort elements before and after the
         // Partition Index pi
@@ -148,26 +147,23 @@ void quickSort(int arr[], int low, int high) {
     }
 }
 
+void readFile(const string& filename, int arr[], unsigned int N){
+    string path = "../files/" + filename;
+    ifstream file(path);
 
-//int argc, char const *argv[]
-
-void lerArquivoParaArray(const string& nomeArquivo, int arr[], unsigned int N) {
-    string caminho = "./files/" + nomeArquivo;  // Caminho com o diretório ./files/
-    ifstream file(caminho);
-    
-    if (!file.is_open()) {
-        cerr << "Erro ao abrir o arquivo: " << caminho << endl;
+    if (!file.is_open()){
+        cerr << "Error opening file: " << path << endl;
         return;
     }
 
-    string linha;
-    if (getline(file, linha)) {
-        stringstream ss(linha);
-        string valor;
+    string line;
+    if (getline(file, line)){
+        stringstream ss(line);
+        string value;
         unsigned int i = 0;
 
-        while (getline(ss, valor, ',') && i < N) {
-            arr[i] = stoi(valor);
+        while (getline(ss, value, ',') && i < N){
+            arr[i] = stoi(value);
             i++;
         }
     }
@@ -176,17 +172,26 @@ void lerArquivoParaArray(const string& nomeArquivo, int arr[], unsigned int N) {
 }
 
 int main(){
-    int array[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-    int n = 10;
-  	
-  	auto start = high_resolution_clock::now();
-  	
-  	// Função do QuickSort
-    quickSort(array, 0, n - 1);
-    
+    const unsigned int N = 100000;
+    int arr[N];
+
+    string fileName = "RandomNumbers1.txt";
+
+    readFile(fileName, arr, N);
+
+    auto start = high_resolution_clock::now();
+
+    quickSort(arr, 0, N - 1);
+
     auto end = high_resolution_clock::now();
-    
-    cout << "Valores: " << duration_cast<nanoseconds>(end - start).count() << " nanoseconds" << endl;
-    
+
+    unsigned long long value = duration_cast<nanoseconds>(end - start).count();
+    cout << "Nanossegundos: " << value << endl;
+    cout << "Segundos: " << value / 1e+9 << endl;
+
+    for (int i = 0; i < 100; i++){
+        cout << arr[i] << ", ";
+    }
+
     return 0;
 }
