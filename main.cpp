@@ -172,9 +172,9 @@ void readFile(const string& filename, int arr[], unsigned int N){
 
 int main(){
     const unsigned int N = 100000;
-    int arr[N];
+    int *arr = new int[N]; // Aloca no heap (memória ilimitada)
 
-    string fileName = "ReversedORdenedNumbers.txt";
+    string fileName = "OrdenedNumbers.txt";
 
     readFile(fileName, arr, N);
 
@@ -191,6 +191,8 @@ int main(){
     for (int i = 0; i < 100; i++){
         cout << arr[i] << ", ";
     }
+
+    delete[] arr; // Libera a memória ao final
 
     return 0;
 }
