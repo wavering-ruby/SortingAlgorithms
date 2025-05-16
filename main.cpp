@@ -130,7 +130,6 @@ int partition(int arr[], int low, int high){
 }
 
 void quickSort(int arr[], int low, int high){
-
     // Base case: This part will be executed till the starting
     // index low is lesser than the ending index high
     if (low < high) {
@@ -175,13 +174,13 @@ int main(){
     const unsigned int N = 100000;
     int arr[N];
 
-    string fileName = "RandomNumbers1.txt";
+    string fileName = "ReversedORdenedNumbers.txt";
 
     readFile(fileName, arr, N);
 
     auto start = high_resolution_clock::now();
 
-    quickSort(arr, 0, N - 1);
+    bubbleSort(arr, N);
 
     auto end = high_resolution_clock::now();
 
