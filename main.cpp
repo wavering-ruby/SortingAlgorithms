@@ -203,7 +203,7 @@ void readFile(const string& filename, int arr[], unsigned int N){
     //*************************************************
     //******* Mude aqui o caminho do arquivo **********
     //*************************************************
-    string path = "../files/" + filename;
+    string path = "../test/" + filename;
     ifstream file(path);
 
     if (!file.is_open()){
