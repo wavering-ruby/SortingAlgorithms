@@ -10,9 +10,9 @@ using namespace std::chrono;
 void merge(int arr[], int left, int mid, int right) {
     const int n1 = mid - left + 1;
     const int n2 = right - mid;
-    // int *L = new int[n1]; // Aloca no heap (memória ilimitada)
-    // int *R = new int[n2]; // Aloca no heap (memória ilimitada)
-    int L[n1], R[n2]; // Aloca no stack (memória limitada)
+    int *L = new int[n1]; // Aloca no heap (memória ilimitada)
+    int *R = new int[n2]; // Aloca no heap (memória ilimitada)
+    // int L[n1], R[n2]; // Aloca no stack (memória limitada)
 
     for (int i = 0; i < n1; i++)
         L[i] = arr[left + i];
@@ -45,8 +45,8 @@ void merge(int arr[], int left, int mid, int right) {
         k++;
     }
 
-    // delete[] L; // Libera a memória ao final
-    // delete[] R; // Libera a memória ao final
+    delete[] L; // Libera a memória ao final
+    delete[] R; // Libera a memória ao final
 }
 
 void mergeSort(int arr[], int left, int right) {
@@ -200,6 +200,9 @@ void quickSort(int arr[], int low, int high){
 }
 
 void readFile(const string& filename, int arr[], unsigned int N){
+    //*************************************************
+    //******* Mude aqui o caminho do arquivo **********
+    //*************************************************
     string path = "../files/" + filename;
     ifstream file(path);
 
@@ -209,6 +212,7 @@ void readFile(const string& filename, int arr[], unsigned int N){
     }
 
     string line;
+
     if (getline(file, line)){
         stringstream ss(line);
         string value;
