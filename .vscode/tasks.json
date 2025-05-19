@@ -9,6 +9,7 @@
         "-Wall",
         "-Wextra",
         "-g",
+        "-O0",
         "${file}",
         "-o",
         "${workspaceFolder}/output/output.exe"

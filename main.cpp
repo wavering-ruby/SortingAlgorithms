@@ -228,13 +228,16 @@ void readFile(const string& filename, int arr[], unsigned int N){
 }
 
 int main(){
-    const unsigned int N = 100000;
+    //*************************************************
+    //********* Mude aqui o qtd de elementos **********
+    //*************************************************
+    const unsigned int N = 10000;
     int *arr = new int[N]; // Aloca no heap (memória ilimitada)
 
     //*************************************************
     //********* Mude aqui o nome do arquivo ***********
     //*************************************************
-    string fileName = "RandomNumbers3.txt";
+    string fileName = "ReversedOrdenedNumbers.txt";
 
     readFile(fileName, arr, N);
 
@@ -249,11 +252,11 @@ int main(){
 
     auto start = high_resolution_clock::now();
 
-    // quickSort(arr, 0, N - 1);
+    // quickSort(arr, 0, N - 1); // Por algum motivo ainda não está funcionando
     // mergeSort(arr, 0, N - 1);
-    // radixSort(arr, N);
+    radixSort(arr, N);
     // insertionSort(arr, N);
-    bubbleSort(arr, N);
+    // bubbleSort(arr, N);
 
     auto end = high_resolution_clock::now();
 
@@ -261,9 +264,9 @@ int main(){
     cout << "Nanossegundos: " << value << endl;
     cout << "Segundos: " << value / 1e+9 << endl;
 
-    for (int i = 0; i < 100; i++){
-        cout << arr[i] << ", ";
-    }
+    // for (int i = 0; i < 100; i++){
+    //     cout << arr[i] << ", ";
+    // }
 
     delete[] arr; // Libera a memória ao final
 
