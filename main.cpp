@@ -3,51 +3,41 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 using namespace std::chrono;
 
-void countSort(int array[], int size) {
-  // The size of count must be at least the (max+1) but
-  // we cannot assign declare it as int count(max+1) in C++ as
-  // it does not support dynamic memory allocation.
-  // So, its size is provided statically.
-  int output[10];
-  int count[10];
-  int max = array[0];
+int* countSort(int* arr, int tamanho) {
+    if (tamanho <= 0) return nullptr;
 
-  // Find the largest element of the array
-  for (int i = 1; i < size; i++) {
-    if (array[i] > max)
-      max = array[i];
-  }
+    int max_val = arr[0];
+    for (int i = 1; i < tamanho; i++) {
+        if (arr[i] > max_val) {
+            max_val = arr[i];
+        }
+    }
 
-  // Initialize count array with all zeros.
-  for (int i = 0; i <= max; ++i) {
-    count[i] = 0;
-  }
+    int* count = new int[max_val + 1]();
 
-  // Store the count of each element
-  for (int i = 0; i < size; i++) {
-    count[array[i]]++;
-  }
+    for (int i = 0; i < tamanho; i++) {
+        count[arr[i]]++;
+    }
 
-  // Store the cummulative count of each array
-  for (int i = 1; i <= max; i++) {
-    count[i] += count[i - 1];
-  }
+    for (int i = 1; i <= max_val; i++) {
+        count[i] += count[i - 1];
+    }
 
-  // Find the index of each element of the original array in count array, and
-  // place the elements in output array
-  for (int i = size - 1; i >= 0; i--) {
-    output[count[array[i]] - 1] = array[i];
-    count[array[i]]--;
-  }
+    int* output = new int[tamanho];
 
-  // Copy the sorted elements into original array
-  for (int i = 0; i < size; i++) {
-    array[i] = output[i];
-  }
+    for (int i = tamanho - 1; i >= 0; i--) {
+        output[count[arr[i]] - 1] = arr[i];
+        count[arr[i]]--;
+    }
+
+    delete[] count;
+
+    return output;
 }
 
 void merge(int arr[], int left, int mid, int right) {
@@ -280,7 +270,7 @@ int main(){
     //*************************************************
     //********* Mude aqui o nome do arquivo ***********
     //*************************************************
-    string fileName = "RandomNumbers2.txt";
+    string fileName = "RandomNumbers1.txt";
 
     readFile(fileName, arr, N);
 
@@ -296,10 +286,11 @@ int main(){
     auto start = high_resolution_clock::now();
 
     // quickSort(arr, 0, N - 1); // Não está funcionando
-    // mergeSort(arr, 0, N - 1); // Não está funcionando
-    radixSort(arr, N); // Funciona bem!
+    // mergeSort(arr, 0, N - 1); // Funciona bem!
+    // radixSort(arr, N); // Funciona bem!
     // insertionSort(arr, N); // Funciona bem!
     // bubbleSort(arr, N); // Funciona bem!
+    int* sort = countSort(arr, N); // Testando
 
     auto end = high_resolution_clock::now();
 
@@ -308,9 +299,10 @@ int main(){
     cout << "Segundos: " << value / 1e+9 << endl;
 
     for (int i = 0; i < 100; i++){
-        cout << arr[i] << ", ";
+        cout << sort[i] << ", ";
     }
 
+    delete[] sort;
     delete[] arr; // Libera a memória ao final
 
     return 0;
