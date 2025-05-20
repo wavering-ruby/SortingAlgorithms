@@ -231,7 +231,7 @@ int main(){
     //*************************************************
     //********* Mude aqui o qtd de elementos **********
     //*************************************************
-    const unsigned int N = 80000;
+    const unsigned int N = 100000;
     int *arr = new int[N]; // Aloca no heap (memória ilimitada)
 
     //*************************************************
@@ -254,8 +254,8 @@ int main(){
 
     // quickSort(arr, 0, N - 1); // Não está funcionando
     // mergeSort(arr, 0, N - 1); // Não está funcionando
-    // radixSort(arr, N); // Funciona bem!
-    insertionSort(arr, N); // Funciona bem!
+    radixSort(arr, N); // Funciona bem!
+    // insertionSort(arr, N); // Funciona bem!
     // bubbleSort(arr, N); // Funciona bem!
 
     auto end = high_resolution_clock::now();
