@@ -237,7 +237,7 @@ int main(){
     //*************************************************
     //********* Mude aqui o nome do arquivo ***********
     //*************************************************
-    string fileName = "OrdenedNumbers.txt";
+    string fileName = "RandomNumbers1.txt";
 
     readFile(fileName, arr, N);
 
@@ -252,11 +252,11 @@ int main(){
 
     auto start = high_resolution_clock::now();
 
-     quickSort(arr, 0, N - 1); // Não está funcionando
+    // quickSort(arr, 0, N - 1); // Não está funcionando
     // mergeSort(arr, 0, N - 1); // Não está funcionando
     // radixSort(arr, N); // Funciona bem!
     // insertionSort(arr, N); // Funciona bem!
-    // bubbleSort(arr, N); // Funciona bem!
+    bubbleSort(arr, N); // Funciona bem!
 
     auto end = high_resolution_clock::now();
 
