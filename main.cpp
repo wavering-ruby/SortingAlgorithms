@@ -231,13 +231,13 @@ int main(){
     //*************************************************
     //********* Mude aqui o qtd de elementos **********
     //*************************************************
-    const unsigned int N = 100000;
+    const unsigned int N = 80000;
     int *arr = new int[N]; // Aloca no heap (memória ilimitada)
 
     //*************************************************
     //********* Mude aqui o nome do arquivo ***********
     //*************************************************
-    string fileName = "RandomNumbers1.txt";
+    string fileName = "RandomNumbers2.txt";
 
     readFile(fileName, arr, N);
 
@@ -255,8 +255,8 @@ int main(){
     // quickSort(arr, 0, N - 1); // Não está funcionando
     // mergeSort(arr, 0, N - 1); // Não está funcionando
     // radixSort(arr, N); // Funciona bem!
-    // insertionSort(arr, N); // Funciona bem!
-    bubbleSort(arr, N); // Funciona bem!
+    insertionSort(arr, N); // Funciona bem!
+    // bubbleSort(arr, N); // Funciona bem!
 
     auto end = high_resolution_clock::now();
 
