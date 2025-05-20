@@ -7,6 +7,49 @@
 using namespace std;
 using namespace std::chrono;
 
+void countSort(int array[], int size) {
+  // The size of count must be at least the (max+1) but
+  // we cannot assign declare it as int count(max+1) in C++ as
+  // it does not support dynamic memory allocation.
+  // So, its size is provided statically.
+  int output[10];
+  int count[10];
+  int max = array[0];
+
+  // Find the largest element of the array
+  for (int i = 1; i < size; i++) {
+    if (array[i] > max)
+      max = array[i];
+  }
+
+  // Initialize count array with all zeros.
+  for (int i = 0; i <= max; ++i) {
+    count[i] = 0;
+  }
+
+  // Store the count of each element
+  for (int i = 0; i < size; i++) {
+    count[array[i]]++;
+  }
+
+  // Store the cummulative count of each array
+  for (int i = 1; i <= max; i++) {
+    count[i] += count[i - 1];
+  }
+
+  // Find the index of each element of the original array in count array, and
+  // place the elements in output array
+  for (int i = size - 1; i >= 0; i--) {
+    output[count[array[i]] - 1] = array[i];
+    count[array[i]]--;
+  }
+
+  // Copy the sorted elements into original array
+  for (int i = 0; i < size; i++) {
+    array[i] = output[i];
+  }
+}
+
 void merge(int arr[], int left, int mid, int right) {
     const int n1 = mid - left + 1;
     const int n2 = right - mid;
@@ -91,7 +134,7 @@ int getMax(int arr[], int n){ // Radix sort
 // A function to do counting sort of arr[]
 // according to the digit
 // represented by exp.
-void countSortR(int arr[], int n, int exp){ // Radix sort
+void countSortR(int arr[], int n, int exp){ // Biblioteca do RadixSort
     // Output array
     int* output = new int[n]; // aloca dinamicamente
     int i, count[10] = { 0 };
@@ -138,7 +181,7 @@ void radixSort(int arr[], int n){ // radixsort
     }
 }
 
-void insertionSort(int arr[], int n){
+void insertionSort(int arr[], int n){ // Função principal do insertion sort
     for (int i = 1; i < n; ++i) {
         int key = arr[i];
         int j = i - 1;
