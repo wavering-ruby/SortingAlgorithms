@@ -346,7 +346,7 @@ int main(){
     //*************************************************
     //********* Mude aqui o qtd de elementos **********
     //*************************************************
-    const unsigned int N = 10000;
+    const unsigned int N = 20000;
     int *arr = new int[N]; // Aloca no heap (memória ilimitada)
 
     //*************************************************
