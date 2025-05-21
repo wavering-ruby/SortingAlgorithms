@@ -8,6 +8,35 @@
 using namespace std;
 using namespace std::chrono;
 
+void selectionSort(int arr[], int n) { // Função principal do selection sort
+
+    for (int i = 0; i < n - 1; ++i) {
+
+        // Assume the current position holds
+        // the minimum element
+        int min_idx = i;
+
+        // Iterate through the unsorted portion
+        // to find the actual minimum
+        for (int j = i + 1; j < n; ++j) {
+            if (arr[j] < arr[min_idx]) {
+
+                // Update min_idx if a smaller
+                // element is found
+                min_idx = j; 
+            }
+        }
+
+        // Move minimum element to its
+        // correct position
+        if (min_idx != i) {
+            int temp = arr[i];
+            arr[i] = arr[min_idx];
+            arr[min_idx] = temp;
+        }
+    }
+}
+
 int* countSort(int* arr, int tamanho) {
     if (tamanho <= 0){
         return nullptr;
@@ -266,7 +295,7 @@ int main(){
     //*************************************************
     //********* Mude aqui o qtd de elementos **********
     //*************************************************
-    const unsigned int N = 10000;
+    const unsigned int N = 100000;
     int *arr = new int[N]; // Aloca no heap (memória ilimitada)
 
     //*************************************************
@@ -292,7 +321,8 @@ int main(){
     // radixSort(arr, N); // Funciona bem!
     // insertionSort(arr, N); // Funciona bem!
     // bubbleSort(arr, N); // Funciona bem!
-    int* sort = countSort(arr, N); // Funciona bem!
+    // int* sort = countSort(arr, N); // Funciona bem!
+    selectionSort(arr, N); // Testando
 
     auto end = high_resolution_clock::now();
 
@@ -301,10 +331,10 @@ int main(){
     cout << "Segundos: " << value / 1e+9 << endl;
 
     for (int i = 0; i < 100; i++){
-        cout << sort[i] << ", ";
+        cout << arr[i] << ", ";
     }
 
-    delete[] sort;
+    // delete[] sort;
     delete[] arr; // Libera a memória ao final
 
     return 0;
