@@ -8,8 +8,59 @@
 using namespace std;
 using namespace std::chrono;
 
-void selectionSort(int arr[], int n) { // Função principal do selection sort
+// To heapify a subtree rooted with node i
+// which is an index in arr[].
+void heapify(int arr[], int n, int i){
 
+    // Initialize largest as root
+    int largest = i;
+
+    // left index = 2i + 1
+    int l = 2 * i + 1;
+
+    // right index = 2i + 2
+    int r = 2  * i + 2;
+
+    // If left child is larger than root
+    if(l < n && arr[l] > arr[largest])
+        largest = l;
+
+    // If right child is larger than largest so far
+    if(r < n && arr[r] > arr[largest])
+        largest = r;
+
+    // If largest is not root
+    if(largest != i) {
+        int temp = arr[i];
+        arr[i] = arr[largest];
+        arr[largest] = temp;
+
+        // Recursively heapify the affected sub-tree
+        heapify(arr, n, largest);
+    }
+}
+
+// Main function to do heap sort
+void heapSort(int arr[], int n){
+
+    // Build heap (rearrange vector)
+    for (int i = n / 2 - 1; i >= 0; i--){
+        heapify(arr, n, i);
+    }
+
+    // One by one extract an element from heap
+    for (int i = n - 1; i > 0; i--){
+        // Move current root to end
+        int temp = arr[0];
+        arr[0] = arr[i];
+        arr[i] = temp;
+
+        // Call max heapify on the reduced heap
+        heapify(arr, i, 0);
+    }
+}
+
+void selectionSort(int arr[], int n) { // Função principal do selection sort
     for (int i = 0; i < n - 1; ++i) {
 
         // Assume the current position holds
@@ -301,7 +352,7 @@ int main(){
     //*************************************************
     //********* Mude aqui o nome do arquivo ***********
     //*************************************************
-    string fileName = "RandomNumbers3.txt";
+    string fileName = "ReversedOrdenedNumbers.txt";
 
     readFile(fileName, arr, N);
 
@@ -322,7 +373,8 @@ int main(){
     // insertionSort(arr, N); // Funciona bem!
     // bubbleSort(arr, N); // Funciona bem!
     // int* sort = countSort(arr, N); // Funciona bem!
-    selectionSort(arr, N); // Testando
+    // selectionSort(arr, N); // Testando
+    heapSort(arr, N); // Funciona bem!
 
     auto end = high_resolution_clock::now();
 
