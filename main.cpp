@@ -9,7 +9,9 @@ using namespace std;
 using namespace std::chrono;
 
 int* countSort(int* arr, int tamanho) {
-    if (tamanho <= 0) return nullptr;
+    if (tamanho <= 0){
+        return nullptr;
+    }
 
     int max_val = arr[0];
     for (int i = 1; i < tamanho; i++) {
