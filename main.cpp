@@ -295,13 +295,13 @@ int main(){
     //*************************************************
     //********* Mude aqui o qtd de elementos **********
     //*************************************************
-    const unsigned int N = 100000;
+    const unsigned int N = 10000;
     int *arr = new int[N]; // Aloca no heap (memória ilimitada)
 
     //*************************************************
     //********* Mude aqui o nome do arquivo ***********
     //*************************************************
-    string fileName = "OrdenedNumbers.txt";
+    string fileName = "RandomNumbers3.txt";
 
     readFile(fileName, arr, N);
 
