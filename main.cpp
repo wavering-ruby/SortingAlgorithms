@@ -124,8 +124,8 @@ int* countSort(int* arr, int tamanho) {
 void merge(int arr[], int left, int mid, int right) {
     const int n1 = mid - left + 1;
     const int n2 = right - mid;
-    int *L = new int[n1]; // Aloca no heap (memória ilimitada)
-    int *R = new int[n2]; // Aloca no heap (memória ilimitada)
+    int* L = new int[n1]; // Aloca no heap (memória ilimitada)
+    int* R = new int[n2]; // Aloca no heap (memória ilimitada)
     // int L[n1], R[n2]; // Aloca no stack (memória limitada)
 
     for (int i = 0; i < n1; i++)
@@ -163,15 +163,17 @@ void merge(int arr[], int left, int mid, int right) {
     delete[] R; // Libera a memória ao final
 }
 
-void mergeSort(int arr[], int left, int right) {
-    if (left >= right){
-        return;
-    }
+void mergeSort(int arr[], int n) {
+    for(int cs = 1; cs <= n - 1; cs = 2 * cs){
+        for(int leftStart = 0; leftStart < n - 1; leftStart += 2 * cs){
+            int mid = min(leftStart + cs - 1, n - 1);
+            int rightEnd = min(leftStart + 2 * cs - 1, n - 1);
 
-    int mid = left + (right - left) / 2;
-    mergeSort(arr, left, mid);
-    mergeSort(arr, mid + 1, right);
-    merge(arr, left, mid, right);
+        
+            merge(arr, leftStart, mid, rightEnd);
+        }
+
+    }
 }
 
 void bubbleSort(int arr[], int n){
@@ -345,7 +347,7 @@ int main(){
     //*************************************************
     //********* Mude aqui o qtd de elementos **********
     //*************************************************
-    const unsigned int N = 20000;
+    const unsigned int N = 10000;
     int *arr = new int[N]; // Aloca no heap (memória ilimitada)
 
     //*************************************************
@@ -367,13 +369,13 @@ int main(){
     auto start = high_resolution_clock::now();
 
     // quickSort(arr, 0, N - 1); // Não está funcionando
-    // mergeSort(arr, 0, N - 1); // Funciona bem!
+    mergeSort(arr, N); // Funciona bem!
     // radixSort(arr, N); // Funciona bem!
     // insertionSort(arr, N); // Funciona bem!
     // bubbleSort(arr, N); // Funciona bem!
     // int* sort = countSort(arr, N); // Funciona bem!
     // selectionSort(arr, N); // Testando
-    heapSort(arr, N); // Funciona bem!
+    // heapSort(arr, N); // Funciona bem!
 
     auto end = high_resolution_clock::now();
 
