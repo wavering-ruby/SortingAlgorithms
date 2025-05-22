@@ -340,7 +340,7 @@ void readFile(const string& filename, int arr[], unsigned int N){
     //*************************************************
     //******* Mude aqui o caminho do arquivo **********
     //*************************************************
-    string path = "../test/" + filename;
+    string path = "test/" + filename;
     ifstream file(path);
 
     if (!file.is_open()){
@@ -368,13 +368,13 @@ int main(){
     //*************************************************
     //********* Mude aqui o qtd de elementos **********
     //*************************************************
-    const unsigned int N = 100000;
+    const unsigned int N = 20000;
     int *arr = new int[N]; // Aloca no heap (memória ilimitada)
 
     //*************************************************
     //********* Mude aqui o nome do arquivo ***********
     //*************************************************
-    string fileName = "ReversedOrdenedNumbers.txt";
+    string fileName = "RandomNumbers3.txt";
 
     readFile(fileName, arr, N);
 
@@ -384,6 +384,18 @@ int main(){
         - Insertion Sort
         - Radin Sort
         - Quick Sort
+            - Reversed
+                - 100000: =(21,4769+22,9294+22,8804)/3
+                - 80000: =(14,7635+14,3482+13,7053)/3
+                - 40000: =(3,41251+3,67817+3,42706)/3
+                - 20000: =(0,859515+0,825755+0,827752)/3
+                - 10000: =(0,227738+0,200497+0,213928)/3
+            - Random
+                - 100000: =()/3
+                - 80000: =()/3
+                - 40000: =()/3
+                - 20000: =()/3
+                - 10000: =(0,002018+0,002018+0,002033)/3
         - Merge Sort
     */
 
