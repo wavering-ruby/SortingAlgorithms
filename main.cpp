@@ -368,44 +368,97 @@ int main(){
     //*************************************************
     //********* Mude aqui o qtd de elementos **********
     //*************************************************
-    const unsigned int N = 20000;
+    const unsigned int N = 100000;
     int *arr = new int[N]; // Aloca no heap (memória ilimitada)
 
     //*************************************************
     //********* Mude aqui o nome do arquivo ***********
     //*************************************************
-    string fileName = "RandomNumbers3.txt";
+    string fileName = "ReversedOrdenedNumbers.txt";
 
     readFile(fileName, arr, N);
 
     // Algoritmos implementados:
     /*
-        - Bubble Sort
         - Insertion Sort
-        - Radin Sort
-        - Quick Sort
             - Reversed
-                - 100000: =(21,4769+22,9294+22,8804)/3
-                - 80000: =(14,7635+14,3482+13,7053)/3
-                - 40000: =(3,41251+3,67817+3,42706)/3
-                - 20000: =(0,859515+0,825755+0,827752)/3
-                - 10000: =(0,227738+0,200497+0,213928)/3
+                - 100000: =(32,5796+33,864+32,1085)/3
+                - 80000: =()/3
+                - 40000: =()/3
+                - 20000: =()/3
+                - 10000: =()/3
             - Random
                 - 100000: =()/3
                 - 80000: =()/3
                 - 40000: =()/3
                 - 20000: =()/3
-                - 10000: =(0,002018+0,002018+0,002033)/3
+                - 10000: =()/3
+        - Radin Sort
+            - Reversed
+                - 100000: =()/3
+                - 80000: =()/3
+                - 40000: =()/3
+                - 20000: =()/3
+                - 10000: =()/3
+            - Random
+                - 100000: =()/3
+                - 80000: =()/3
+                - 40000: =()/3
+                - 20000: =()/3
+                - 10000: =()/3
+            - Ordened
+                - 100000: =()/3
+                - 80000: =()/3
+                - 40000: =()/3
+                - 20000: =()/3
+                - 10000: =()/3
+        - Quick Sort
+            - Reversed
+                - 100000: =()/3
+                - 80000: =()/3
+                - 40000: =()/3
+                - 20000: =()/3
+                - 10000: =()/3
+            - Random
+                - 100000: =()/3
+                - 80000: =()/3
+                - 40000: =()/3
+                - 20000: =()/3
+                - 10000: =()/3
         - Merge Sort
+            - Reversed
+                - 100000: =()/3
+                - 80000: =()/3
+                - 40000: =()/3
+                - 20000: =()/3
+                - 10000: =()/3
+            - Random
+                - 100000: =()/3
+                - 80000: =()/3
+                - 40000: =()/3
+                - 20000: =()/3
+                - 10000: =()/3
+        - Heap Sort
+            - Reversed
+                - 100000: =()/3
+                - 80000: =()/3
+                - 40000: =()/3
+                - 20000: =()/3
+                - 10000: =()/3
+            - Random
+                - 100000: =()/3
+                - 80000: =()/3
+                - 40000: =()/3
+                - 20000: =()/3
+                - 10000: =()/3
     */
 
     auto start = high_resolution_clock::now();
 
-    quickSort(arr, 0, N - 1); // Não está funcionando
+    // quickSort(arr, 0, N - 1); // Não está funcionando
     // mergeSort(arr, N); // Funciona bem!
     // radixSort(arr, N); // Funciona bem!
-    // insertionSort(arr, N); // Funciona bem!
-    // bubbleSort(arr, N); // Funciona bem!
+    insertionSort(arr, N); // Funciona bem!
     // int* sort = countSort(arr, N); // Funciona bem!
     // selectionSort(arr, N); // Testando
     // heapSort(arr, N); // Funciona bem!

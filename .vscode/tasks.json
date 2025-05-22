@@ -2,17 +2,12 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Compilar C++",
+      "label": "Compilar e Rodar main.cpp",
       "type": "shell",
-      "command": "g++",
+      "command": "cmd",
       "args": [
-        "-Wall",
-        "-Wextra",
-        "-g",
-        "-O0",
-        "${file}",
-        "-o",
-        "${workspaceFolder}/output/output.exe"
+        "/c",
+        "g++ -Wall -Wextra -g -O0 main.cpp -o ${fileDirname}\\output.exe && ${fileDirname}\\output.exe"
       ],
       "options": {
         "cwd": "${workspaceFolder}"
@@ -24,7 +19,7 @@
       "problemMatcher": [
         "$gcc"
       ],
-      "detail": "Compilação padrão de C++"
+      "detail": "Compila e executa main.cpp"
     }
   ]
 }
