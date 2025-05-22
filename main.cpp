@@ -168,7 +168,6 @@ void mergeSort(int arr[], int n) {
         for(int leftStart = 0; leftStart < n - 1; leftStart += 2 * cs){
             int mid = min(leftStart + cs - 1, n - 1);
             int rightEnd = min(leftStart + 2 * cs - 1, n - 1);
-
         
             merge(arr, leftStart, mid, rightEnd);
         }
@@ -281,7 +280,7 @@ int partition(int arr[], int low, int high){
     for (int j = low; j <= high - 1; j++){
         // If current element is smaller than or
         // equal to pivot
-        if (arr[j] <= pivot) {
+        if (arr[j] <= pivot){
             i++;
             int temp = arr[i];
             arr[i] = arr[j];
@@ -299,20 +298,42 @@ int partition(int arr[], int low, int high){
 }
 
 void quickSort(int arr[], int low, int high){
-    // Base case: This part will be executed till the starting
-    // index low is lesser than the ending index high
-    if (low < high) {
+    // Create an auxiliary stack
+    int* stack = new int[high - low + 1];
 
-        // pi is Partitioning Index, arr[p] is now at
-        // right place
-        int pi = partition(arr, low, high);
-        // cout << "PI: " << pi << endl;
+	// initialize top of stack 
+	int top = -1; 
 
-        // Separately sort elements before and after the
-        // Partition Index pi
-        quickSort(arr, low, pi - 1);
-        quickSort(arr, pi + 1, high);
-    }
+	// push initial values of l and h to stack 
+	stack[++top] = low; 
+	stack[++top] = high; 
+
+	// Keep popping from stack while is not empty 
+	while (top >= 0) { 
+		// Pop h and l 
+		high = stack[top--]; 
+		low = stack[top--]; 
+
+		// Set pivot element at its correct position 
+		// in sorted array 
+		int p = partition(arr, low, high); 
+
+		// If there are elements on left side of pivot, 
+		// then push left side to stack 
+		if (p - 1 > low) { 
+			stack[++top] = low; 
+			stack[++top] = p - 1; 
+		} 
+
+		// If there are elements on right side of pivot, 
+		// then push right side to stack 
+		if (p + 1 < high) { 
+			stack[++top] = p + 1; 
+			stack[++top] = high; 
+		} 
+	}
+
+    delete[] stack; // Libera a memória ao final
 }
 
 void readFile(const string& filename, int arr[], unsigned int N){
@@ -353,13 +374,13 @@ int main(){
     //*************************************************
     //********* Mude aqui o nome do arquivo ***********
     //*************************************************
-    string fileName = "OrdenedNumbers.txt";
+    string fileName = "ReversedOrdenedNumbers.txt";
 
     readFile(fileName, arr, N);
 
     // Algoritmos implementados:
     /*
-        - Bubble Sort 
+        - Bubble Sort
         - Insertion Sort
         - Radin Sort
         - Quick Sort
@@ -368,8 +389,8 @@ int main(){
 
     auto start = high_resolution_clock::now();
 
-    // quickSort(arr, 0, N - 1); // Não está funcionando
-    mergeSort(arr, N); // Funciona bem!
+    quickSort(arr, 0, N - 1); // Não está funcionando
+    // mergeSort(arr, N); // Funciona bem!
     // radixSort(arr, N); // Funciona bem!
     // insertionSort(arr, N); // Funciona bem!
     // bubbleSort(arr, N); // Funciona bem!
