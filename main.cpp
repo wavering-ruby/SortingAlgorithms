@@ -380,20 +380,7 @@ int main(){
 
     // Algoritmos implementados:
     /*
-        - Insertion Sort
-            - Reversed
-                - 100000: =(32,5796+33,864+32,1085)/3
-                - 80000: =()/3
-                - 40000: =()/3
-                - 20000: =()/3
-                - 10000: =()/3
-            - Random
-                - 100000: =()/3
-                - 80000: =()/3
-                - 40000: =()/3
-                - 20000: =()/3
-                - 10000: =()/3
-        - Radin Sort
+        - Quick Sort
             - Reversed
                 - 100000: =()/3
                 - 80000: =()/3
@@ -407,19 +394,6 @@ int main(){
                 - 20000: =()/3
                 - 10000: =()/3
             - Ordened
-                - 100000: =()/3
-                - 80000: =()/3
-                - 40000: =()/3
-                - 20000: =()/3
-                - 10000: =()/3
-        - Quick Sort
-            - Reversed
-                - 100000: =()/3
-                - 80000: =()/3
-                - 40000: =()/3
-                - 20000: =()/3
-                - 10000: =()/3
-            - Random
                 - 100000: =()/3
                 - 80000: =()/3
                 - 40000: =()/3
@@ -457,10 +431,9 @@ int main(){
 
     // quickSort(arr, 0, N - 1); // Não está funcionando
     // mergeSort(arr, N); // Funciona bem!
-    // radixSort(arr, N); // Funciona bem!
-    insertionSort(arr, N); // Funciona bem!
+    radixSort(arr, N); // Funciona bem!
+    // insertionSort(arr, N); // Funciona bem!
     // int* sort = countSort(arr, N); // Funciona bem!
-    // selectionSort(arr, N); // Testando
     // heapSort(arr, N); // Funciona bem!
 
     auto end = high_resolution_clock::now();
