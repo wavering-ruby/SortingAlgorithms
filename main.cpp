@@ -374,45 +374,24 @@ int main(){
     //*************************************************
     //********* Mude aqui o nome do arquivo ***********
     //*************************************************
-    string fileName = "ReversedOrdenedNumbers.txt";
+    string fileName = "OrdenedNumbers.txt";
 
     readFile(fileName, arr, N);
 
     // Algoritmos implementados:
     /*
-        - Merge Sort
-            - Reversed
-                - 100000: =(0.077619)/3
-                - 80000: =()/3
-                - 40000: =()/3
-                - 20000: =()/3
-                - 10000: =()/3
-            - Random
-                - 100000: =()/3
-                - 80000: =()/3
-                - 40000: =()/3
-                - 20000: =()/3
-                - 10000: =()/3
         - Heap Sort
-            - Reversed
-                - 100000: =()/3
-                - 80000: =()/3
-                - 40000: =()/3
-                - 20000: =()/3
-                - 10000: =()/3
-            - Random
-                - 100000: =()/3
-                - 80000: =()/3
-                - 40000: =()/3
-                - 20000: =()/3
-                - 10000: =()/3
+            - Ordened:
+                - 100000: 
+                - 80000: 
+                - 40000: 
+                - 20000: 
+                - 10000: 
     */
 
     auto start = high_resolution_clock::now();
 
-    mergeSort(arr, N); // Funciona bem!
-    // int* sort = countSort(arr, N); // Funciona bem!
-    // heapSort(arr, N); // Funciona bem!
+    // int* sort = countSort(arr, N); // Está com alguns bugs
 
     auto end = high_resolution_clock::now();
 
