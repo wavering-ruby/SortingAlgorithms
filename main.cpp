@@ -314,8 +314,6 @@ void quickSort(int arr[], int low, int high){
 		high = stack[top--]; 
 		low = stack[top--]; 
 
-		// Set pivot element at its correct position 
-		// in sorted array 
 		int p = partition(arr, low, high); 
 
 		// If there are elements on left side of pivot, 
@@ -374,24 +372,13 @@ int main(){
     //*************************************************
     //********* Mude aqui o nome do arquivo ***********
     //*************************************************
-    string fileName = "OrdenedNumbers.txt";
+    string fileName = "RandomNumbers3.txt";
 
     readFile(fileName, arr, N);
 
-    // Algoritmos implementados:
-    /*
-        - Heap Sort
-            - Ordened:
-                - 100000: 
-                - 80000: 
-                - 40000: 
-                - 20000: 
-                - 10000: 
-    */
-
     auto start = high_resolution_clock::now();
 
-    // int* sort = countSort(arr, N); // Está com alguns bugs
+    int* sort = countSort(arr, N); // Está com alguns bugs
 
     auto end = high_resolution_clock::now();
 
@@ -400,10 +387,10 @@ int main(){
     cout << "Segundos: " << value / 1e+9 << endl;
 
     for (int i = 0; i < 100; i++){
-        cout << arr[i] << ", ";
+        cout << sort[i] << ", ";
     }
 
-    // delete[] sort;
+    delete[] sort;
     delete[] arr; // Libera a memória ao final
 
     return 0;
