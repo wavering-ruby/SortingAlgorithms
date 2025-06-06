@@ -4,6 +4,9 @@
 #include <sstream>
 #include <string>
 
+// Para as bibliotecas de ordenação
+#include "./include/SortAlgorithms.h"
+
 using namespace std;
 using namespace std::chrono;
 
@@ -175,23 +178,7 @@ void mergeSort(int arr[], int n) {
     }
 }
 
-void bubbleSort(int arr[], int n){
-    bool swapped;
-    for(int i = 0; i < n - 1; i++) {
-        swapped = false;
-        for (int j = 0; j < n - i - 1; j++) {
-            if (arr[j] > arr[j + 1]) {
-                int temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
-                swapped = true;
-            }
-        }
-        
-        if (swapped == false)
-            break;
-    }
-}
+
 
 // A utility function to get maximum
 // value in arr[]
@@ -366,7 +353,7 @@ int main(){
     //*************************************************
     //********* Mude aqui o qtd de elementos **********
     //*************************************************
-    const unsigned int N = 100000;
+    const unsigned int N = 10000;
     int *arr = new int[N]; // Aloca no heap (memória ilimitada)
 
     //*************************************************
@@ -378,7 +365,8 @@ int main(){
 
     auto start = high_resolution_clock::now();
 
-    int* sort = countSort(arr, N); // Está com alguns bugs
+    // int* sort = countSort(arr, N); // Está com alguns bugs
+    SortAlgorithms::bubbleSort(arr, N);
 
     auto end = high_resolution_clock::now();
 
@@ -387,10 +375,9 @@ int main(){
     cout << "Segundos: " << value / 1e+9 << endl;
 
     for (int i = 0; i < 100; i++){
-        cout << sort[i] << ", ";
+        cout << arr[i] << ", ";
     }
 
-    delete[] sort;
     delete[] arr; // Libera a memória ao final
 
     return 0;
