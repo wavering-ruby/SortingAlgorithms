@@ -3,7 +3,6 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <bits/stdc++.h>
 
 using namespace std;
 using namespace std::chrono;
