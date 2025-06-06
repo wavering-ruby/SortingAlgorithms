@@ -5,7 +5,7 @@
 #include <string>
 
 // Para as bibliotecas de ordenação
-#include "./include/SortAlgorithms.h"
+#include "include/SortAlgorithms.h"
 
 using namespace std;
 using namespace std::chrono;
